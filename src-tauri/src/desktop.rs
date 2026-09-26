@@ -444,6 +444,12 @@ pub enum TrayMenuAction {
     Quit,
 }
 
+#[allow(dead_code)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+enum AppMenuAction {
+    ShowAboutPanel,
+}
+
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct TrayMenuSpec {
     pub id: &'static str,
@@ -671,6 +677,14 @@ pub fn tray_menu_action(id: &str) -> Option<TrayMenuAction> {
         TRAY_TOGGLE_CLOSE_TO_TRAY_ID => Some(TrayMenuAction::ToggleCloseToTray),
         TRAY_TOGGLE_AUTOSTART_ID => Some(TrayMenuAction::ToggleAutostart),
         TRAY_QUIT_ID => Some(TrayMenuAction::Quit),
+        _ => None,
+    }
+}
+
+#[allow(dead_code)]
+fn app_menu_action(id: &str) -> Option<AppMenuAction> {
+    match id {
+        MACOS_APP_ABOUT_ID => Some(AppMenuAction::ShowAboutPanel),
         _ => None,
     }
 }
